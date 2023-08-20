@@ -1,0 +1,15 @@
+name: Create new talos ISO with DRBD
+on: [push]
+jobs:
+  Build:
+    name: Build new image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build new image
+        run: docker run --rm -t -v $PWD/_out:/out ghcr.io/siderolabs/imager:v1.5.0 iso --system-extension-image ghcr.io/siderolabs/drbd:9.2.4-v1.5.0
+      - name: Publish Asset
+        uses: cb80/pubrel@latest
+        with:
+          files: |
+            $PWD/_out/metal-amd64.iso
+            
