@@ -3,6 +3,9 @@ on:
   release:
     types: [created]
 # on: push
+permissions:
+  contents: write
+  discussions: write
 jobs:
   Build:
     name: Build new image
