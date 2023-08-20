@@ -1,7 +1,8 @@
 name: Create new talos ISO with DRBD
-on:
-  release:
-    types: [created]
+# on:
+#   release:
+#     types: [created]
+on: push
 jobs:
   Build:
     name: Build new image
@@ -9,13 +10,10 @@ jobs:
     steps:
       - name: Build new image#
         run: docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:v1.5.0 iso --system-extension-image ghcr.io/siderolabs/drbd:9.2.4-v1.5.0
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        # if: startsWith(github.ref, 'refs/tags/')
         with:
-          upload_url: ${{ github.event.release.upload_url }} 
-          asset_path: ./_out/metal-amd64.iso
-          asset_name: metal-amd64.iso
-          asset_content_type: application/octet-stream
+          files: |
+            ./_out/metal-amd64.iso
             
