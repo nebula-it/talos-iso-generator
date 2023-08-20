@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build new image
-        run: docker run --rm -t -v $PWD/_out:/out ghcr.io/siderolabs/imager:v1.5.0 iso --system-extension-image ghcr.io/siderolabs/drbd:9.2.4-v1.5.0
+        run: docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:v1.5.0 iso --system-extension-image ghcr.io/siderolabs/drbd:9.2.4-v1.5.0
       - name: Publish Asset
         uses: cb80/pubrel@latest
         with:
