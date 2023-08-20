@@ -15,7 +15,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }} 
-          asset_path: _out/metal-amd64.iso
+          asset_path: ./_out/metal-amd64.iso
           asset_name: metal-amd64.iso
           asset_content_type: application/octet-stream
             
