@@ -1,14 +1,14 @@
 name: Create new talos ISO with DRBD
-# on:
-#   release:
-#     types: [created]
-on: push
+on:
+  release:
+    types: [created]
+# on: push
 jobs:
   Build:
     name: Build new image
     runs-on: ubuntu-latest
     steps:
-      - name: Build new image#
+      - name: Build new image
         run: docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:v1.5.0 iso --system-extension-image ghcr.io/siderolabs/drbd:9.2.4-v1.5.0
       - name: Release
         uses: softprops/action-gh-release@v1
