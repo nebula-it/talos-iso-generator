@@ -6,16 +6,18 @@ on: push
 permissions:
   contents: write
   discussions: write
-# env:
-#   TALOS_VERSION: ''
-#   DRBD_IMAGE_VERSION: ${{ github.event.release.tag_name }}
+env:
+  TALOS_VERSION: ''
+  # DRBD_IMAGE_VERSION: ${{ github.event.release.tag_name }}
+  DRBD_IMAGE_VERSION: '9.2.4-v1.5.1'
 jobs:
   Build:
     name: Build new image
     runs-on: ubuntu-latest
     steps:
-    #   - name: Get Talos Version
-    #     run: pwsh -c "$TALOS_VERSION = $DRBD_IMAGE_VERSION.Split('-')[-1]"
+      - name: Get Talos Version
+        shell: pwsh
+        run: $env:TALOS_VERSION = $env:DRBD_IMAGE_VERSION.Split('-')[-1]
     #   - name: Build new image
     #     run: docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION iso --system-extension-image ghcr.io/siderolabs/drbd:DRBD_IMAGE_VERSION
     #   - name: Release
@@ -31,12 +33,12 @@ jobs:
       - name: Var Github Ref
         id: reference
         shell: pwsh
-        run : Write-Host ${{ github.ref }}
+        run : Write-Host ${{ $env:DRBD_IMAGE_VERSION }}
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
       - name: Get var
         shell: pwsh
-        run: Write-Host ${{ steps.reference.outputs }}
+        run: Write-Host ${{ $env:TALOS_VERSION }}
       # - name: Var github.event.release.tag_name
       #   run : pwsh -c "Write-Host ${{ github.event.release.tag_name }}"
             
