@@ -7,7 +7,6 @@ permissions:
   contents: write
   discussions: write
 env:
-  TALOS_VERSION: ''
   # DRBD_IMAGE_VERSION: ${{ github.event.release.tag_name }}
   DRBD_IMAGE_VERSION: '9.2.4-v1.5.1'
 jobs:
@@ -18,10 +17,11 @@ jobs:
       - name: Get Talos Version
         shell: pwsh
         id: talos
-        run: Add-Content -Path "$env:GITHUB_ENV" -Value "TALOS_VERSION = ${DRBD_IMAGE_VERSION.Split('-')[-1]}"
-        env:
-          DRBD_IMAGE_VERSION: ${{env.DRBD_IMAGE_VERSION}}
-          
+        # run: Add-Content -Path "$env:GITHUB_ENV" -Value "TALOS_VERSION = ${DRBD_IMAGE_VERSION.Split('-')[-1]}"
+        run: |
+          $talos_ver = (${{ env.DRBD_IMAGE_VERSION }}).Split('-')[-1]
+          "{TALOS_VERSION}={$talos_ver}" | Out-File -FilePath $env:GITHUB_ENV -Append
+
     #   - name: Build new image
     #     run: docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION iso --system-extension-image ghcr.io/siderolabs/drbd:DRBD_IMAGE_VERSION
     #   - name: Release
@@ -40,9 +40,12 @@ jobs:
         run: Get-Content "$env:GITHUB_ENV"
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
-      # - name: Get var
-      #   shell: pwsh
-      #   run: Write-Host ${{ steps.talos.outputs }}
+      - name: Get var
+        shell: pwsh
+        run: Write-Host $env:DRBD_IMAGE_VERSION
+      - name: Get var
+        shell: pwsh
+        run: Write-Host $env:TALOS_VERSION
       # - name: Var github.event.release.tag_name
       #   run : pwsh -c "Write-Host ${{ github.event.release.tag_name }}"
             
