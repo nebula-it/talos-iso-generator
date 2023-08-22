@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Get Talos Version
         shell: pwsh
-        run:${{$env.TALOS_VERSION}} = ${{env.DRBD_IMAGE_VERSION}}.Split('-')[-1]
+        run: ${{env.TALOS_VERSION}} = ${{env.DRBD_IMAGE_VERSION}}.Split('-')[-1]
     #   - name: Build new image
     #     run: docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION iso --system-extension-image ghcr.io/siderolabs/drbd:DRBD_IMAGE_VERSION
     #   - name: Release
