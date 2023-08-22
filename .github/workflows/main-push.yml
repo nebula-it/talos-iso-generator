@@ -11,9 +11,9 @@ permissions:
 #   DRBD_IMAGE_VERSION: ${{ github.event.release.tag_name }}
 jobs:
   Build:
-    # name: Build new image
-    # runs-on: ubuntu-latest
-    # steps:
+    name: Build new image
+    runs-on: ubuntu-latest
+    steps:
     #   - name: Get Talos Version
     #     run: pwsh -c "$TALOS_VERSION = $DRBD_IMAGE_VERSION.Split('-')[-1]"
     #   - name: Build new image
