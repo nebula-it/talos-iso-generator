@@ -33,7 +33,7 @@ jobs:
       - name: Var Github Ref
         id: reference
         shell: pwsh
-        run : Write-Host ${{ $env:DRBD_IMAGE_VERSION }}
+        run: Write-Host ${{ $env:DRBD_IMAGE_VERSION }}
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
       - name: Get var
