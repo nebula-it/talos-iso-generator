@@ -19,7 +19,7 @@ jobs:
         id: talos
         # run: Add-Content -Path "$env:GITHUB_ENV" -Value "TALOS_VERSION = ${DRBD_IMAGE_VERSION.Split('-')[-1]}"
         run: |
-          $talos_ver = (${{ env.DRBD_IMAGE_VERSION }}).Split('-')[-1]
+          $talos_ver = '(${{ env.DRBD_IMAGE_VERSION }})'.Split('-')[-1]
           "{TALOS_VERSION}={$talos_ver}" | Out-File -FilePath $env:GITHUB_ENV -Append
 
     #   - name: Build new image
