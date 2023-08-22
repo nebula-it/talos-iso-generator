@@ -18,7 +18,7 @@ jobs:
       - name: Get Talos Version
         shell: pwsh
         id: talos
-        run: Add-Content -Path "$GITHUB_ENV" -Value "TALOS_VERSION = ${DRBD_IMAGE_VERSION.Split('-')[-1]}"
+        run: Add-Content -Path "$env:GITHUB_ENV" -Value "TALOS_VERSION = ${DRBD_IMAGE_VERSION.Split('-')[-1]}"
         env:
           DRBD_IMAGE_VERSION: ${{env.DRBD_IMAGE_VERSION}}
           
@@ -37,7 +37,7 @@ jobs:
       - name: Var Github Ref
         id: reference
         shell: pwsh
-        run: Get-Content "$GITHUB_ENV"
+        run: Get-Content "$env:GITHUB_ENV"
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
       # - name: Get var
