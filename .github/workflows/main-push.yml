@@ -17,7 +17,11 @@ jobs:
     steps:
       - name: Get Talos Version
         shell: pwsh
-        run: ${{env.TALOS_VERSION}} = ${{env.DRBD_IMAGE_VERSION}}.Split('-')[-1]
+        id: talos
+        run:  Write-Host "::set-output name=value::${DRBD_IMAGE_VERSION.Split('-')[-1]}"
+        env:
+          DRBD_IMAGE_VERSION: ${{env.DRBD_IMAGE_VERSION}}
+          
     #   - name: Build new image
     #     run: docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION iso --system-extension-image ghcr.io/siderolabs/drbd:DRBD_IMAGE_VERSION
     #   - name: Release
@@ -38,7 +42,7 @@ jobs:
       #   run: pwsh -c "$env:test = 'abc'"
       - name: Get var
         shell: pwsh
-        run: Write-Host ${{ env.TALOS_VERSION }}
+        run: Write-Host ${{ steps.talos.outputs.value}}
       # - name: Var github.event.release.tag_name
       #   run : pwsh -c "Write-Host ${{ github.event.release.tag_name }}"
             
