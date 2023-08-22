@@ -30,11 +30,13 @@ jobs:
       #   run: echo $SHELL
       - name: Var Github Ref
         id: reference
-        run : pwsh -c "Write-Host ${{ github.ref }}"
+        shell: pwsh
+        run : Write-Host ${{ github.ref }}
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
       - name: Get var
-        run: pwsh -c "Write-Host ${{ steps.reference.outputs }}"
+        shell: pwsh
+        run: Write-Host ${{ steps.reference.outputs }}
       # - name: Var github.event.release.tag_name
       #   run : pwsh -c "Write-Host ${{ github.event.release.tag_name }}"
             
