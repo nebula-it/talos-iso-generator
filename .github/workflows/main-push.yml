@@ -18,7 +18,7 @@ jobs:
       - name: Get Talos Version
         shell: pwsh
         id: talos
-        run:  ${DRBD_IMAGE_VERSION.Split('-')[-1]} >> $GITHUB_OUTPUT
+        run: Add-Content -Path "$GITHUB_ENV" -Value "TALOS_VERSION = ${DRBD_IMAGE_VERSION.Split('-')[-1]}"
         env:
           DRBD_IMAGE_VERSION: ${{env.DRBD_IMAGE_VERSION}}
           
@@ -34,15 +34,15 @@ jobs:
     #         ./_out/metal-amd64.iso
       # - name: Test Shell
       #   run: echo $SHELL
-      # - name: Var Github Ref
-      #   id: reference
-      #   shell: pwsh
-      #   run: Get-Content $GITHUB_OUTPUT
+      - name: Var Github Ref
+        id: reference
+        shell: pwsh
+        run: Get-Content "$GITHUB_ENV"
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
-      - name: Get var
-        shell: pwsh
-        run: Write-Host ${{ steps.talos.outputs }}
+      # - name: Get var
+      #   shell: pwsh
+      #   run: Write-Host ${{ steps.talos.outputs }}
       # - name: Var github.event.release.tag_name
       #   run : pwsh -c "Write-Host ${{ github.event.release.tag_name }}"
             
