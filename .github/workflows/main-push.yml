@@ -34,10 +34,10 @@ jobs:
     #         ./_out/metal-amd64.iso
       # - name: Test Shell
       #   run: echo $SHELL
-      - name: Var Github Ref
-        id: reference
-        shell: pwsh
-        run: Get-Content $GITHUB_OUTPUT
+      # - name: Var Github Ref
+      #   id: reference
+      #   shell: pwsh
+      #   run: Get-Content $GITHUB_OUTPUT
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
       - name: Get var
