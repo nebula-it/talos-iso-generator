@@ -24,7 +24,7 @@ jobs:
       - name: Build new image
         shell: pwsh
         run: |
-          $drbd_image_version: ${{ github.event.release.tag_name }}
+          $drbd_image_version = ${{ github.event.release.tag_name }}
           $talos_version = $drbd_image_version.Split('-')[-1]
           docker run --rm -t -v $PWD/_out:/out -v /dev:/dev --privileged ghcr.io/siderolabs/imager:$talos_version iso --system-extension-image ghcr.io/siderolabs/drbd:$drbd_image_version
       - name: Release
