@@ -1,8 +1,8 @@
 name: Create new talos ISO with DRBD
-# on:
-#   release:
-#     types: [created]
-on: push
+on:
+  release:
+    types: [created]
+# on: push
 permissions:
   contents: write
   discussions: write
