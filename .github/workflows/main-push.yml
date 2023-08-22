@@ -18,7 +18,7 @@ jobs:
       - name: Get Talos Version
         shell: pwsh
         id: talos
-        run:  Write-Host "::set-output name=value::${DRBD_IMAGE_VERSION.Split('-')[-1]}"
+        run:  ${DRBD_IMAGE_VERSION.Split('-')[-1]} >> $GITHUB_OUTPUT
         env:
           DRBD_IMAGE_VERSION: ${{env.DRBD_IMAGE_VERSION}}
           
@@ -37,12 +37,12 @@ jobs:
       - name: Var Github Ref
         id: reference
         shell: pwsh
-        run: Write-Host ${{ env.DRBD_IMAGE_VERSION }}
+        run: Get-Content $GITHUB_OUTPUT
       # - name: Set var
       #   run: pwsh -c "$env:test = 'abc'"
       - name: Get var
         shell: pwsh
-        run: Write-Host ${{ steps.talos.outputs.value}}
+        run: Write-Host ${{ steps.talos.outputs.value }}
       # - name: Var github.event.release.tag_name
       #   run : pwsh -c "Write-Host ${{ github.event.release.tag_name }}"
             
