@@ -42,7 +42,7 @@ jobs:
       #   run: pwsh -c "$env:test = 'abc'"
       - name: Get var
         shell: pwsh
-        run: Write-Host ${{ steps.talos.outputs.value }}
+        run: Write-Host ${{ steps.talos.outputs }}
       # - name: Var github.event.release.tag_name
       #   run : pwsh -c "Write-Host ${{ github.event.release.tag_name }}"
             
